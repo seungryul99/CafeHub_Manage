@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menus</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #dddddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* 검색 폼을 화면 오른쪽으로 이동 */
+        form {
+            margin-top: 20px;
+            margin-right: 10%;
+            margin-bottom: 40px;
+            text-align: right; /* 오른쪽 정렬 */
+        }
+
+        /* 검색어 입력란 스타일 */
+        input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-left: 10px; /* 좌측 마진 추가 */
+        }
+
+        /* 검색 버튼 스타일 */
+        button {
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-left: 10px; /* 좌측 마진 추가 */
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .page-buttons a,
+        .page-buttons span {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 0 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .page-buttons a:hover {
+            background-color: #f2f2f2;
+        }
+
+        .index-column {
+            width: 10%;
+        }
+
+        .category-column,
+        .name-column,
+        .price-column,
+        .best-column {
+            width: 20%;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .button-container a,
+        .button-container button {
+            padding: 5px 10px;
+            margin: 0 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #007bff;
+            cursor: pointer;
+        }
+
+        .button-container a:hover,
+        .button-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .button-container a.cancel {
+            background-color: #dc3545;
+        }
+
+        .button-container a.cancel:hover {
+            background-color: #c82333;
+        }
+        .delete-button {
+            font-size: 12px; /* 아주 작은 크기로 설정 */
+            color: red; /* 빨간색으로 설정 */
+            cursor: pointer; /* 커서 모양 변경 */
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <h1>Menus</h1>
+</div>
+
+<br>
+
+<table>
+    <thead>
+    <tr>
+        <th>No.</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Best</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="menu, iterstat : ${response.menus}">
+        <td class="index-column" th:text="${iterstat.count}">index</td>
+        <td class="name-column" th:text="${menu.name}">Name</td>
+        <td class="price-column" th:text="${menu.price}">Price</td>
+        <td class="category-column" th:text="${menu.category}">Category</td>
+        <td class="best-column" th:text="${menu.best}">Best</td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="button-container">
+    <a th:href="@{'/menuCreateForm/' + ${response.cafeId}}" >New Menu</a>
+    <a th:href="@{'/cafes/' + ${response.cafeId}}" class="cancel">Go to cafe</a>
+</div>
+
+</body>
+</html>

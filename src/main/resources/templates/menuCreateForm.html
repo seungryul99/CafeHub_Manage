@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            width: 50%;
+            margin: 20px auto;
+            border: 1px solid #dddddd;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        form div {
+            margin-bottom: 15px;
+        }
+
+        form label {
+            margin-bottom: 5px;
+            display: block;
+            font-weight: bold;
+        }
+
+        form input[type="text"],
+        form input[type="number"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        form button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #0056b3;
+        }
+
+        .button-container a,
+        .button-container button {
+            padding: 5px 10px;
+            margin: 0 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #007bff;
+            cursor: pointer;
+        }
+
+        .button-container a:hover,
+        .button-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .button-container a.cancel {
+            background-color: #dc3545;
+        }
+
+        .button-container a.cancel:hover {
+            background-color: #c82333;
+        }
+
+        .create-button{
+            margin-top: 40px;
+            text-align: right;
+        }
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <h1>Create New Menu</h1>
+    <br/>
+</div>
+
+<form th:action="@{'/createMenu/' + ${response}}" method="post">
+
+    <div>
+        <label for="category">Category:</label>
+        <select id="category" name="category">
+            <option value="BEVERAGE">BEVERAGE</option>
+            <option value="DESSERT">Dessert</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    <div>
+        <label for="price">Price:</label>
+        <input type="text" id="price" name="price" required>
+    </div>
+    <div>
+        <label for="best">Best:</label>
+        <select id="best" name="best">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select>
+    </div>
+
+    <div class="create-button">
+        <button type="submit">Add Menu</button>
+    </div>
+</form>
+
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafe List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #dddddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* 검색 폼을 화면 오른쪽으로 이동 */
+        form {
+            margin-top: 20px;
+            margin-right: 10%;
+            margin-bottom: 40px;
+            text-align: right; /* 오른쪽 정렬 */
+        }
+
+        /* 검색어 입력란 스타일 */
+        input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-left: 10px; /* 좌측 마진 추가 */
+        }
+
+        /* 검색 버튼 스타일 */
+        button {
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-left: 10px; /* 좌측 마진 추가 */
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+
+        .page-buttons {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .page-buttons a,
+        .page-buttons span {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 0 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .page-buttons a:hover {
+            background-color: #f2f2f2;
+        }
+
+
+        .index-column {
+            width: 20%; /* 너비 조정 */
+        }
+
+        .name-column {
+            width: 60%; /* 너비 조정 */
+        }
+
+        .theme-column {
+            width: 20%; /* 너비 조정 */
+        }
+        .logout-button{
+            background-color: black;
+            color: white;
+        }
+        .logout-button:hover{
+            background-color: #7c7878;
+        }
+
+
+
+    </style>
+</head>
+<body>
+<div class="header">
+
+    <h1>Cafe List</h1>
+
+    <form th:action="@{/logout}" method="post">
+        <button class="logout-button" type="submit">Log out</button>
+    </form>
+</div>
+
+<br>
+
+
+
+
+<form action="#" method="get">
+    <label for="search"></label>
+    <input type="text" id="search" name="search" placeholder="Enter cafe name...">
+    <button type="submit">Search</button>
+</form>
+
+<table>
+    <thead>
+    <tr>
+        <th>No.</th>
+        <th>Cafe Name</th>
+        <th>Theme</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="cafe, iterstat : ${response.cafeResponses}">
+        <td class="index-column" th:text="${(response.currentPage) * response.size + iterstat.count}">index</td>
+        <td>
+            <a th:href="@{'/cafes/' + ${cafe.cafeId}}">
+                <span class="name-column" th:text="${cafe.cafeName}">Cafe Name</span>
+            </a>
+        </td>
+        <td class="theme-column" th:text="${cafe.cafeTheme}">Theme</td>
+    </tr>
+
+    </tbody>
+</table>
+
+<div class="page-buttons">
+    <button class="write-button" type="button" onclick="window.location.href='/cafeCreateForm'">New Cafe</button>
+</div>
+
+<!-- 페이징 버튼은 나중에 처리-->
+
+</body>
+</html>
